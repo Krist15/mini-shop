@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "sku": "item0001",
+      "name": "Smartphone",
+      "price": 999.99
+    },
+    {
+      "sku": "item0002",
+      "name": "Smart Watch",
+      "price": 1124.99
+    },
+    {
+      "sku": "item0003",
+      "name": "Laptop",
+      "price": 1500
+    }
+  ]
+}

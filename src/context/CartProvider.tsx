@@ -78,7 +78,6 @@ const reducer = (
       if (!itemExists) {
         throw new Error('Item must exist in order to update quantity');
       }
-
       const updatedItem: CartItemType = {
         ...itemExists,
         qty,

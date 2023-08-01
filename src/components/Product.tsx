@@ -9,11 +9,6 @@ type PropType = {
 };
 
 const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropType) => {
-  const img: string = new URL(`../images/${product.sku}.webp`, import.meta.url)
-    .href;
-  console.log(img);
-  console.log(product.sku);
-
   const onAddToCart = () =>
     dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } });
 
@@ -21,10 +16,10 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropType) => {
 
   return (
     <article className="product">
-      <h3>{product.name}</h3>
+      <h3>{product.title}</h3>
       <img
-        src={img}
-        alt={product.name}
+        src={product.image}
+        alt={product.title}
         className="product__img"
       />
       <p>

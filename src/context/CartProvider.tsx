@@ -1,9 +1,10 @@
 import { useReducer, createContext, useMemo } from 'react';
 
 export type CartItemType = {
-  sku: string;
-  name: string;
+  id: string;
+  title: string;
   price: number;
+  image: string;
   qty: number;
 };
 
@@ -34,20 +35,22 @@ const reducer = (
       if (!action.payload) {
         throw new Error('action.payload missing in ADD action');
       }
-
-      const { sku, name, price } = action.payload;
+      const { id, title, price, image } = action.payload;
 
       const filteredCart: CartItemType[] = state.cart.filter(
-        (item) => item.sku !== sku
+        (item) => item.id !== id
       );
 
       const itemExists: CartItemType | undefined = state.cart.find(
-        (item) => item.sku === sku
+        (item) => item.id === id
       );
 
       const qty: number = itemExists ? itemExists.qty + 1 : 1;
 
-      return { ...state, cart: [...filteredCart, { sku, name, price, qty }] };
+      return {
+        ...state,
+        cart: [...filteredCart, { id, title, price, image, qty }],
+      };
     }
 
     case REDUCER_ACTION_TYPE.REMOVE: {
@@ -55,10 +58,10 @@ const reducer = (
         throw new Error('action.payload missing in REMOVE action');
       }
 
-      const { sku } = action.payload;
+      const { id } = action.payload;
 
       const filteredCart: CartItemType[] = state.cart.filter(
-        (item) => item.sku !== sku
+        (item) => item.id !== id
       );
 
       return { ...state, cart: [...filteredCart] };
@@ -69,10 +72,10 @@ const reducer = (
         throw new Error('action.payload missing in QUANTITY action');
       }
 
-      const { sku, qty } = action.payload;
+      const { id, qty } = action.payload;
 
       const itemExists: CartItemType | undefined = state.cart.find(
-        (item) => item.sku === sku
+        (item) => item.id === id
       );
 
       if (!itemExists) {
@@ -84,7 +87,7 @@ const reducer = (
       };
 
       const filteredCart: CartItemType[] = state.cart.filter(
-        (item) => item.sku !== sku
+        (item) => item.id !== id
       );
 
       return { ...state, cart: [...filteredCart, updatedItem] };
@@ -119,11 +122,8 @@ const useCartContext = (initCartState: CartStateType) => {
     }, 0)
   );
 
-  const cart = state.cart.sort((a, b) => {
-    const itemA = Number(a.sku.slice(-4));
-    const itemB = Number(b.sku.slice(-4));
-
-    return itemA - itemB;
+  const cart = [...state.cart].sort((a, b) => {
+    return b.price - a.price;
   });
 
   return { dispatch, REDUCER_ACTIONS, totalItems, totalPrice, cart };

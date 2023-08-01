@@ -8,8 +8,6 @@ type PropType = {
 };
 
 const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropType) => {
-  const img = new URL(`../images/${item.sku}.webp`, import.meta.url).href;
-
   const lineTotal = item.qty * item.price;
 
   const highestqQty = 20 > item.qty ? 20 : item.qty;
@@ -43,11 +41,11 @@ const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropType) => {
   return (
     <li className="cart__item">
       <img
-        src={img}
-        alt={item.name}
+        src={item.image}
+        alt={item.title}
         className="cart__img"
       />
-      <div aria-label="Item Name">{item.name}</div>
+      <div aria-label="Item Name">{item.title}</div>
       {new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',

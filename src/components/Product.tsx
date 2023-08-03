@@ -12,15 +12,15 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropType) => {
   const onAddToCart = () =>
     dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } });
 
-  const itemInCart = inCart ? ' → Item in Cart: ✅' : null;
+  const itemInCart = inCart ? '✅' : null;
 
   return (
-    <article className="product">
-      <h3>{product.title}</h3>
+    <article className="w-72 h-72">
+      <h3 className="break-all">{product.category}</h3>
       <img
         src={product.image}
         alt={product.title}
-        className="product__img"
+        className="w-50 h-40"
       />
       <p>
         {new Intl.NumberFormat('en-US', {
@@ -28,7 +28,12 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropType) => {
           currency: 'USD',
         }).format(product.price)}
         {itemInCart}
-        <button onClick={onAddToCart}>Add to Cart</button>
+        <button
+          onClick={onAddToCart}
+          className="p-1 rounded border-[1px] border-black hover:bg-gray-100"
+        >
+          Add to Cart
+        </button>
       </p>
     </article>
   );

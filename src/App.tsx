@@ -8,14 +8,14 @@ const App = () => {
   const [viewCart, setViewCart] = useState(false);
 
   return (
-    <>
+    <div>
       <Header
         viewCart={viewCart}
         setViewCart={setViewCart}
       />
       {viewCart ? <Cart /> : <ProductList />}
       <Footer viewCart={viewCart} />
-    </>
+    </div>
   );
 };
 

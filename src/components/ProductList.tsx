@@ -25,7 +25,9 @@ const ProductList = () => {
     });
   }
 
-  return <main className="main main--products">{pageContent}</main>;
+  return (
+    <main className="flex flex-wrap gap-10 justify-between">{pageContent}</main>
+  );
 };
 
 export default ProductList;

@@ -1,5 +1,4 @@
 import Nav from './Nav';
-import useCart from '../hooks/useCart';
 
 type PropType = {
   viewCart: boolean;
@@ -7,17 +6,11 @@ type PropType = {
 };
 
 const Header = ({ viewCart, setViewCart }: PropType) => {
-  const { totalItems, totalPrice } = useCart();
-
   const content = (
-    <header className="header">
+    <header className="flex justify-between items-center w-full h-[5.3rem] bg-black/5 sticky top-0 backdrop-blur-md border-b-[1px] border-b-white">
       <div className="header__title-bar">
-        <h1>Mini shop</h1>
+        <h1 className="text-black text-4xl "> Mini shop</h1>
         <div className="header__price-box"></div>
-        <div>
-          <p>Total Items: {totalItems}</p>
-          <p>Total Price: {totalPrice}</p>
-        </div>
       </div>
       <Nav
         viewCart={viewCart}

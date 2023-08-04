@@ -18,11 +18,10 @@ enum REDUCER_ACTION_TYPE {
   QUANTITY = 'QUANTITY',
   SUBMIT = 'SUBMIT',
 }
-
 export type ReducerActionType = typeof REDUCER_ACTION_TYPE;
 
 export type ReducerAction = {
-  type: string;
+  type: REDUCER_ACTION_TYPE;
   payload?: CartItemType;
 };
 
@@ -143,7 +142,7 @@ export const CartContext = createContext<UseCartContextType>(
   initialCartContextState
 );
 
-type ChildrenType = { children?: React.ReactElement | React.ReactElement[] };
+type ChildrenType = { children?: React.ReactNode };
 
 export const CartProvider = ({ children }: ChildrenType) => {
   return (

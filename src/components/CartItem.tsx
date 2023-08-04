@@ -7,7 +7,11 @@ type PropType = {
   REDUCER_ACTIONS: ReducerActionType;
 };
 
-const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropType) => {
+export default function CartItem({
+  item,
+  dispatch,
+  REDUCER_ACTIONS,
+}: PropType) {
   const lineTotal = item.qty * item.price;
 
   const highestqQty = 20 > item.qty ? 20 : item.qty;
@@ -39,13 +43,13 @@ const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropType) => {
     });
 
   return (
-    <li className="cart__item">
+    <li className="w-60 h-60">
       <img
         src={item.image}
         alt={item.title}
         className="cart__img"
       />
-      <div aria-label="Item Name">{item.title}</div>
+      <div>{item.title}</div>
       {new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -53,38 +57,31 @@ const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropType) => {
 
       <label
         htmlFor="itemQty"
-        className="offscreen"
+        className=""
       >
-        Item Quantity
+        Quantity
       </label>
       <select
         name="itemQty"
         id="itemQty"
-        className="cart__select"
+        className=""
         value={item.qty}
-        aria-label="Item Quantity"
         onChange={onChangeQty}
       >
         {options}
       </select>
-      <div
-        className="cart__item-subtotal"
-        aria-label="Line Item Subtotal"
-      >
+      <div className="">
         {new Intl.NumberFormat('en-US', {
           style: 'currency',
           currency: 'USD',
         }).format(lineTotal)}
       </div>
       <button
-        aria-label="Remove Item From Cart"
-        title="Remove Item For Cart"
         onClick={removeForCart}
-        className="cart__button"
+        className="px-2 border-2 border-red-500 rounded-md"
       >
         ❌
       </button>
     </li>
   );
-};
-export default CartLineItem;
+}

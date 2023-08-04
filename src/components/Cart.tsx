@@ -1,8 +1,8 @@
 import useCart from '../hooks/useCart';
 import { useState } from 'react';
-import CartLineItem from './CartLineItem';
+import CartItem from './CartItem';
 
-const Cart = () => {
+export default function Cart() {
   const [confirm, setConfirm] = useState(false);
   const { dispatch, REDUCER_ACTIONS, totalItems, totalPrice, cart } = useCart();
 
@@ -11,17 +11,19 @@ const Cart = () => {
     setConfirm(true);
   };
 
+  if (!cart.length) return <div className="text-4xl">Empty Cart</div>;
+
   return (
-    <main className="main main--cart">
+    <main className="">
       {confirm ? (
         <h2>Thank you for your order.</h2>
       ) : (
         <>
-          <h2 className="offscreen">Cart</h2>
-          <ul className="cart">
+          <h2 className="">Cart</h2>
+          <ul className="flex flex-wrap">
             {cart.map((item) => {
               return (
-                <CartLineItem
+                <CartItem
                   key={item.id}
                   item={item}
                   dispatch={dispatch}
@@ -30,11 +32,11 @@ const Cart = () => {
               );
             })}
           </ul>
-          <div className="cart__totals">
-            <p>Total Items: {totalItems}</p>
-            <p>Total Price: {totalPrice}</p>
+          <div className="">
+            <p>Items: {totalItems}</p>
+            <p>Price: {totalPrice}</p>
             <button
-              className="cart__submit"
+              className="border-2 border-black rounded-md p-2"
               disabled={!totalItems}
               onSubmit={onSubmitOrder}
             >
@@ -45,6 +47,4 @@ const Cart = () => {
       )}
     </main>
   );
-};
-
-export default Cart;
+}

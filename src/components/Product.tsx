@@ -8,11 +8,16 @@ type PropType = {
   inCart: boolean;
 };
 
-const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropType) => {
+export default function Product({
+  product,
+  dispatch,
+  REDUCER_ACTIONS,
+  inCart,
+}: PropType) {
   const onAddToCart = () =>
     dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } });
 
-  const itemInCart = inCart ? '✅' : null;
+  const itemInCart = inCart && '🛒';
 
   return (
     <article className="w-72 h-72">
@@ -37,6 +42,4 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropType) => {
       </p>
     </article>
   );
-};
-
-export default Product;
+}

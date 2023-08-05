@@ -10,7 +10,7 @@ export default function ProductList() {
   if (!products.length) return <Spinner />;
 
   return (
-    <main className="flex flex-wrap gap-10 justify-between">
+    <main className="flex flex-wrap gap-10 p-5 py-10 justify-around">
       {products?.length &&
         products.map((product) => {
           const inCart: boolean = cart.some((item) => item.id === product.id);

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import cartIcon from '../assets/cart.svg';
 import homeIcon from '../assets/home.svg';
 import useCart from '../hooks/useCart';
@@ -9,30 +10,36 @@ type PropType = {
 
 export default function Nav({ viewCart, setViewCart }: PropType) {
   const { totalItems } = useCart();
+  console.log(totalItems);
 
   return (
     <div>
       {viewCart ? (
-        <button onClick={() => setViewCart(false)}>
+        <Link
+          onClick={() => setViewCart(false)}
+          to="/products"
+        >
           <img
             src={homeIcon}
-            alt="home icon"
+            alt="Home Icon"
             className="h-12 w-14 p-2 hover:scale-105 transition ease-in-out relative"
           />
-        </button>
+        </Link>
       ) : (
-        <button
+        <Link
           onClick={() => setViewCart(true)}
-          className="h-12 w-14 p-2 hover:scale-105 transition ease-in-out relative animate-shake"
+          to="/cart"
+          className="relative h-12 w-14 p-2 hover:scale-105 transition ease-in-out"
         >
           <img
             src={cartIcon}
-            alt=""
+            alt="Cart Icon"
+            className="h-12 w-14 p-2 hover:scale-105 transition ease-in-out"
           />
-          <span className="absolute flex items-center justify-center -top-3 right-1 w-6 h-6 rounded-full bg-black text-white">
+          <span className="absolute flex items-center justify-center left-10 top-5 w-6 h-6 rounded-full bg-black text-white">
             {totalItems}
           </span>
-        </button>
+        </Link>
       )}
     </div>
   );

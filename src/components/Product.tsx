@@ -17,7 +17,7 @@ export default function Product({
   const onAddToCart = () =>
     dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } });
 
-  const itemInCart = inCart && '🛒';
+  const itemInCart = inCart && ' 🛒 ';
 
   return (
     <article className="w-72 h-72">

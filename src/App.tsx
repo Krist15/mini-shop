@@ -1,7 +1,9 @@
 import Header from './components/Header';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
+import Home from './components/Home';
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 export default function App() {
   const [viewCart, setViewCart] = useState(false);
@@ -12,7 +14,20 @@ export default function App() {
         viewCart={viewCart}
         setViewCart={setViewCart}
       />
-      {viewCart ? <Cart /> : <ProductList />}
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/products"
+          element={<ProductList />}
+        />
+        <Route
+          path="/cart"
+          element={<Cart />}
+        />
+      </Routes>
     </div>
   );
 }

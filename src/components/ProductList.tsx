@@ -7,7 +7,7 @@ export default function ProductList() {
   const { dispatch, REDUCER_ACTIONS, cart } = useCart();
   const { products } = useProducts();
 
-  if (products.length === 0) return <Spinner />;
+  if (!products.length) return <Spinner />;
 
   return (
     <main className="flex flex-wrap gap-10 justify-between">

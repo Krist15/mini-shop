@@ -10,7 +10,7 @@ export default function App() {
   const [viewCart, setViewCart] = useState(false);
 
   return (
-    <div className="bg-[#F5F5F5] h-full">
+    <div className="bg-[#F5F5F5]">
       <Header
         viewCart={viewCart}
         setViewCart={setViewCart}

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import productService from '../services/products';
 
 export type ProductType = {
   id: string;
@@ -30,22 +31,9 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
   const [products, setProducts] = useState<ProductType[]>(initialState);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = (await response.json()) as ProductType[];
-        const filteredData = data.filter(
-          (product) =>
-            product.category !== 'jewelery' &&
-            product.category !== 'electronics'
-        );
-        setProducts(filteredData);
-      } catch (error) {
-        if (error instanceof Error) console.log(error.message);
-      }
-    };
-
-    fetchProducts();
+    productService
+      .getProducts()
+      .then((res) => setProducts(res as ProductType[]));
   }, []);
 
   return (

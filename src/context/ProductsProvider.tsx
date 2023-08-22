@@ -18,9 +18,15 @@ export type Rating = {
 
 const initialState: ProductType[] = [];
 
-export type UseProductsContextType = { products: ProductType[] };
+export type UseProductsContextType = {
+  products: ProductType[];
+  setProducts: React.Dispatch<React.SetStateAction<ProductType[]>> | null;
+};
 
-const initialContextState: UseProductsContextType = { products: initialState };
+const initialContextState: UseProductsContextType = {
+  products: initialState,
+  setProducts: null,
+};
 
 const ProductsContext =
   createContext<UseProductsContextType>(initialContextState);
@@ -37,7 +43,7 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ products }}>
+    <ProductsContext.Provider value={{ products, setProducts }}>
       {children}
     </ProductsContext.Provider>
   );
